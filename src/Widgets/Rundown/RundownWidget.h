@@ -114,5 +114,6 @@ class WIDGETS_EXPORT RundownWidget : public QWidget, Ui::RundownWidget
         Q_SLOT void switchRundown1(const SwitchRundown1Event&);
         Q_SLOT void switchRundown2(const SwitchRundown2Event&);
         Q_SLOT void reloadRundownMenu(const ReloadRundownMenuEvent&);
-        Q_SLOT void switchRundownMenu(const SwitchRundownMenuEvent&);
+        Q_SLOT void switchRundown1Menu(const SwitchRundown1MenuEvent&);
+        Q_SLOT void switchRundown2Menu(const SwitchRundown2MenuEvent&);
 };

@@ -54,7 +54,8 @@ RundownWidget::RundownWidget(QWidget* parent)
     QObject::connect(&EventManager::getInstance(), SIGNAL(markAllItemsAsUsed(const MarkAllItemsAsUsedEvent&)), this, SLOT(markAllItemsAsUsed(const MarkAllItemsAsUsedEvent&)));
     QObject::connect(&EventManager::getInstance(), SIGNAL(markAllItemsAsUnused(const MarkAllItemsAsUnusedEvent&)), this, SLOT(markAllItemsAsUnused(const MarkAllItemsAsUnusedEvent&)));
     QObject::connect(&EventManager::getInstance(), SIGNAL(reloadRundownMenu(const ReloadRundownMenuEvent&)), this, SLOT(reloadRundownMenu(const ReloadRundownMenuEvent&)));
-    QObject::connect(&EventManager::getInstance(), SIGNAL(switchRundownMenu(const SwitchRundownMenuEvent&)), this, SLOT(switchRundownMenu(const SwitchRundownMenuEvent&)));
+    QObject::connect(&EventManager::getInstance(), SIGNAL(switchRundown1Menu(const SwitchRundown1MenuEvent&)), this, SLOT(switchRundown1Menu(const SwitchRundown1MenuEvent&)));
+    QObject::connect(&EventManager::getInstance(), SIGNAL(switchRundown2Menu(const SwitchRundown2MenuEvent&)), this, SLOT(switchRundown2Menu(const SwitchRundown2MenuEvent&)));
 }
 
 void RundownWidget::setupMenus()
