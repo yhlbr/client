@@ -65,11 +65,13 @@
 #include "Events/Rundown/RundownItemSelectedEvent.h"
 #include "Events/Rundown/RepositoryRundownEvent.h"
 #include "Events/Rundown/ReloadRundownEvent.h"
+#include "Events/Rundown/SwitchRundownEvent.h"
 #include "Events/Rundown/SaveRundownEvent.h"
 #include "Events/Rundown/CopyItemPropertiesEvent.h"
 #include "Events/Rundown/PasteItemPropertiesEvent.h"
 #include "Events/Rundown/InsertRepositoryChangesEvent.h"
 #include "Events/Rundown/ReloadRundownMenuEvent.h"
+#include "Events/Rundown/SwitchRundownMenuEvent.h"
 #include "Events/Rundown/CurrentItemChangedEvent.h"
 #include "Events/TriCaster/TriCasterDeviceChangedEvent.h"
 #include "Models/BlendModeModel.h"
@@ -101,6 +103,7 @@ class CORE_EXPORT EventManager : public QObject
         Q_SIGNAL void executePlayoutCommand(const ExecutePlayoutCommandEvent&);
         Q_SIGNAL void deleteRundown(const DeleteRundownEvent&);
         Q_SIGNAL void reloadRundown(const ReloadRundownEvent&);
+        Q_SIGNAL void switchRundown(const SwitchRundownEvent&);
         Q_SIGNAL void openRundown(const OpenRundownEvent&);
         Q_SIGNAL void openRundownMenu(const OpenRundownMenuEvent&);
         Q_SIGNAL void openRundownFromUrl(const OpenRundownFromUrlEvent&);
@@ -157,6 +160,7 @@ class CORE_EXPORT EventManager : public QObject
         Q_SIGNAL void repositoryRundown(const RepositoryRundownEvent&);
         Q_SIGNAL void insertRepositoryChanges(const InsertRepositoryChangesEvent&);
         Q_SIGNAL void reloadRundownMenu(const ReloadRundownMenuEvent&);
+        Q_SIGNAL void switchRundownMenu(const SwitchRundownMenuEvent&);
         Q_SIGNAL void showAddHttpGetDataDialog(const ShowAddHttpGetDataDialogEvent&);
         Q_SIGNAL void showAddHttpPostDataDialog(const ShowAddHttpPostDataDialogEvent&);
 
@@ -165,6 +169,7 @@ class CORE_EXPORT EventManager : public QObject
         void fireShowAddHttpGetDataDialogEvent(const ShowAddHttpGetDataDialogEvent&);
         void fireDurationChangedEvent(const DurationChangedEvent&);
         void fireReloadRundownMenuEvent(const ReloadRundownMenuEvent&);
+        void fireSwitchRundownMenuEvent(const SwitchRundownMenuEvent&);
         void fireRepositoryRundownEvent(const RepositoryRundownEvent&);
         void fireTriCasterDeviceChangedEvent(const TriCasterDeviceChangedEvent&);
         void fireAtemDeviceChangedEvent(const AtemDeviceChangedEvent&);
@@ -172,6 +177,7 @@ class CORE_EXPORT EventManager : public QObject
         void fireClearCurrentPlayingItemEvent(const ClearCurrentPlayingItemEvent&);
         void fireExecutePlayoutCommandEvent(const ExecutePlayoutCommandEvent&);
         void fireReloadRundownEvent(const ReloadRundownEvent&);
+        void fireSwitchRundownEvent(const SwitchRundownEvent&);
         void fireOpenRundownEvent(const OpenRundownEvent&);
         void fireOpenRundownFromUrlMenuEvent(const OpenRundownFromUrlMenuEvent&);
         void fireAddTemplateDataEvent(const AddTemplateDataEvent&);

@@ -46,11 +46,13 @@ RundownWidget::RundownWidget(QWidget* parent)
     QObject::connect(&EventManager::getInstance(), SIGNAL(saveRundown(const SaveRundownEvent&)), this, SLOT(saveRundown(const SaveRundownEvent&)));
     QObject::connect(&EventManager::getInstance(), SIGNAL(activeRundownChanged(const ActiveRundownChangedEvent&)), this, SLOT(activeRundownChanged(const ActiveRundownChangedEvent&)));
     QObject::connect(&EventManager::getInstance(), SIGNAL(reloadRundown(const ReloadRundownEvent&)), this, SLOT(reloadRundown(const ReloadRundownEvent&)));
+    QObject::connect(&EventManager::getInstance(), SIGNAL(switchRundown(const SwitchRundownEvent&)), this, SLOT(switchRundown(const SwitchRundownEvent&)));
     QObject::connect(&EventManager::getInstance(), SIGNAL(markItemAsUsed(const MarkItemAsUsedEvent&)), this, SLOT(markItemAsUsed(const MarkItemAsUsedEvent&)));
     QObject::connect(&EventManager::getInstance(), SIGNAL(markItemAsUnused(const MarkItemAsUnusedEvent&)), this, SLOT(markItemAsUnused(const MarkItemAsUnusedEvent&)));
     QObject::connect(&EventManager::getInstance(), SIGNAL(markAllItemsAsUsed(const MarkAllItemsAsUsedEvent&)), this, SLOT(markAllItemsAsUsed(const MarkAllItemsAsUsedEvent&)));
     QObject::connect(&EventManager::getInstance(), SIGNAL(markAllItemsAsUnused(const MarkAllItemsAsUnusedEvent&)), this, SLOT(markAllItemsAsUnused(const MarkAllItemsAsUnusedEvent&)));
     QObject::connect(&EventManager::getInstance(), SIGNAL(reloadRundownMenu(const ReloadRundownMenuEvent&)), this, SLOT(reloadRundownMenu(const ReloadRundownMenuEvent&)));
+    QObject::connect(&EventManager::getInstance(), SIGNAL(switchRundownMenu(const SwitchRundownMenuEvent&)), this, SLOT(switchRundownMenu(const SwitchRundownMenuEvent&)));
 }
 
 void RundownWidget::setupMenus()
@@ -89,6 +91,7 @@ void RundownWidget::setupMenus()
     this->insertRepositoryChangesAction = this->contextMenuRundownDropdown->addAction("Insert Repository Changes", this, SLOT(insertRepositoryChanges()));
     this->contextMenuRundownDropdown->addSeparator();
     this->reloadRundownAction = this->contextMenuRundownDropdown->addAction("Reload Rundown", this, SLOT(reloadCurrentRundown()));
+    this->switchRundownAction = this->contextMenuRundownDropdown->addAction("Switch Rundown", this, SLOT(switchCurrentRundown()));
     this->contextMenuRundownDropdown->addSeparator();
     this->contextMenuRundownDropdown->addAction("Close Rundown", this, SLOT(closeCurrentRundown()));
     this->insertRepositoryChangesAction->setEnabled(false);
@@ -166,6 +169,11 @@ bool RundownWidget::checkForSaveBeforeQuit()
 void RundownWidget::reloadRundownMenu(const ReloadRundownMenuEvent& event)
 {
     this->reloadRundownAction->setEnabled(event.getEnabled());
+}
+
+void RundownWidget::switchRundownMenu(const SwitchRundownMenuEvent& event)
+{
+    this->switchRundownAction->setEnabled(event.getEnabled());
 }
 
 void RundownWidget::newRundownMenu(const NewRundownMenuEvent& event)
@@ -364,6 +372,21 @@ void RundownWidget::reloadRundown(const ReloadRundownEvent& event)
     EventManager::getInstance().fireStatusbarEvent(StatusbarEvent(""));
 }
 
+void RundownWidget::switchRundown(const SwitchRundownEvent& event)
+{
+    Q_UNUSED(event);
+
+    EventManager::getInstance().fireStatusbarEvent(StatusbarEvent("Switching rundown..."));
+
+    int currentIndex = this->tabWidgetRundown->currentIndex();
+    int maxIndex = this->tabWidgetRundown->count();
+    int nextIndex = currentIndex + 1;
+    if (nextIndex == maxIndex) nextIndex = 0;
+    this->tabWidgetRundown->setCurrentIndex(nextIndex);
+
+    EventManager::getInstance().fireStatusbarEvent(StatusbarEvent(""));
+}
+
 void RundownWidget::saveRundown(const SaveRundownEvent& event)
 {
     dynamic_cast<RundownTreeWidget*>(this->tabWidgetRundown->currentWidget())->saveRundown(event.getSaveAs());
@@ -418,6 +441,11 @@ void RundownWidget::toggleCompactView()
 void RundownWidget::reloadCurrentRundown()
 {
     EventManager::getInstance().fireReloadRundownEvent(ReloadRundownEvent());
+}
+
+void RundownWidget::switchCurrentRundown()
+{
+    EventManager::getInstance().fireSwitchRundownEvent(SwitchRundownEvent());
 }
 
 void RundownWidget::closeCurrentRundown()

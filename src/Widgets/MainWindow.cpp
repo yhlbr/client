@@ -72,6 +72,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
     QObject::connect(&EventManager::getInstance(), SIGNAL(exportPresetMenu(const ExportPresetMenuEvent&)), this, SLOT(exportPresetMenu(const ExportPresetMenuEvent&)));
     QObject::connect(&EventManager::getInstance(), SIGNAL(saveAsPresetMenu(const SaveAsPresetMenuEvent&)), this, SLOT(saveAsPresetMenu(const SaveAsPresetMenuEvent&)));
     QObject::connect(&EventManager::getInstance(), SIGNAL(reloadRundownMenu(const ReloadRundownMenuEvent&)), this, SLOT(reloadRundownMenu(const ReloadRundownMenuEvent&)));
+    QObject::connect(&EventManager::getInstance(), SIGNAL(switchRundownMenu(const SwitchRundownMenuEvent&)), this, SLOT(switchRundownMenu(const SwitchRundownMenuEvent&)));
 }
 
 void MainWindow::setupMenu()
@@ -127,6 +128,7 @@ void MainWindow::setupMenu()
     this->insertRepositoryChangesAction = this->rundownMenu->addAction("Insert Repository Changes", this, SLOT(insertRepositoryChanges()), QKeySequence::fromString("Ins"));
     this->rundownMenu->addSeparator();
     this->reloadRundownAction = this->rundownMenu->addAction("Reload Rundown", this, SLOT(reloadRundown()), QKeySequence::fromString("Ctrl+L"));
+    this->switchRundownAction = this->rundownMenu->addAction("Switch Rundown", this, SLOT(switchRundown()), QKeySequence::fromString("Ctrl+M"));
     this->rundownMenu->addSeparator();
     this->rundownMenu->addAction("Close Rundown", this, SLOT(closeRundown()), QKeySequence::fromString("Ctrl+W"));
     this->allowRemoteTriggeringAction->setCheckable(true);
@@ -200,6 +202,11 @@ void MainWindow::clearOpenRecent()
 void MainWindow::reloadRundownMenu(const ReloadRundownMenuEvent& event)
 {
     this->reloadRundownAction->setEnabled(event.getEnabled());
+}
+
+void MainWindow::switchRundownMenu(const SwitchRundownMenuEvent& event)
+{
+    this->switchRundownAction->setEnabled(event.getEnabled());
 }
 
 void MainWindow::emptyRundown(const EmptyRundownEvent& event)
@@ -432,6 +439,11 @@ void MainWindow::insertRepositoryChanges()
 void MainWindow::reloadRundown()
 {
     EventManager::getInstance().fireReloadRundownEvent(ReloadRundownEvent());
+}
+
+void MainWindow::switchRundown()
+{
+    EventManager::getInstance().fireSwitchRundownEvent(SwitchRundownEvent());
 }
 
 void MainWindow::showAboutDialog()
