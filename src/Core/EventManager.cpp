@@ -81,6 +81,11 @@ void EventManager::fireReloadRundownMenuEvent(const ReloadRundownMenuEvent& even
     emit reloadRundownMenu(event);
 }
 
+void EventManager::fireSwitchRundownMenuEvent(const SwitchRundownMenuEvent& event)
+{
+    emit switchRundownMenu(event);
+}
+
 void EventManager::fireExportPresetMenuEvent(const ExportPresetMenuEvent& event)
 {
     emit exportPresetMenu(event);
@@ -124,6 +129,11 @@ void EventManager::fireCloseRundownEvent(const CloseRundownEvent& event)
 void EventManager::fireReloadRundownEvent(const ReloadRundownEvent& event)
 {
     emit reloadRundown(event);
+}
+
+void EventManager::fireSwitchRundownEvent(const SwitchRundownEvent& event)
+{
+    emit switchRundown(event);
 }
 
 void EventManager::fireAddTemplateDataEvent(const AddTemplateDataEvent& event)

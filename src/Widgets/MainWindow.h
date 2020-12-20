@@ -18,6 +18,7 @@
 #include "Events/Rundown/MarkAllItemsAsUnusedEvent.h"
 #include "Events/Rundown/OpenRundownMenuEvent.h"
 #include "Events/Rundown/ReloadRundownMenuEvent.h"
+#include "Events/Rundown/SwitchRundownMenuEvent.h"
 
 #include <QtCore/QEvent>
 #include <QtCore/QObject>
@@ -64,6 +65,7 @@ class WIDGETS_EXPORT MainWindow : public QMainWindow, Ui::MainWindow
         QAction* allowRemoteTriggeringAction;
         QAction* insertRepositoryChangesAction;
         QAction* reloadRundownAction;
+        QAction* switchRundownAction;
 
         void setupMenu();
 
@@ -97,6 +99,7 @@ class WIDGETS_EXPORT MainWindow : public QMainWindow, Ui::MainWindow
         Q_SLOT void saveAsPreset();
         Q_SLOT void closeRundown();
         Q_SLOT void reloadRundown();
+        Q_SLOT void switchRundown();
         Q_SLOT void markItemAsUsed();
         Q_SLOT void markItemAsUnused();
         Q_SLOT void markAllItemsAsUsed();
@@ -118,4 +121,5 @@ class WIDGETS_EXPORT MainWindow : public QMainWindow, Ui::MainWindow
         Q_SLOT void exportPresetMenu(const ExportPresetMenuEvent&);
         Q_SLOT void saveAsPresetMenu(const SaveAsPresetMenuEvent&);
         Q_SLOT void reloadRundownMenu(const ReloadRundownMenuEvent&);
+        Q_SLOT void switchRundownMenu(const SwitchRundownMenuEvent&);
 };
