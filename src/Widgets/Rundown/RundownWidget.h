@@ -23,10 +23,12 @@
 #include "Events/Rundown/OpenRundownMenuEvent.h"
 #include "Events/Rundown/OpenRundownFromUrlMenuEvent.h"
 #include "Events/Rundown/ReloadRundownEvent.h"
-#include "Events/Rundown/SwitchRundownEvent.h"
+#include "Events/Rundown/SwitchRundown1Event.h"
+#include "Events/Rundown/SwitchRundown2Event.h"
 #include "Events/Rundown/SaveRundownEvent.h"
 #include "Events/Rundown/ReloadRundownMenuEvent.h"
-#include "Events/Rundown/SwitchRundownMenuEvent.h"
+#include "Events/Rundown/SwitchRundown1MenuEvent.h"
+#include "Events/Rundown/SwitchRundown2MenuEvent.h"
 
 #include <QtCore/QEvent>
 #include <QtCore/QObject>
@@ -60,7 +62,8 @@ class WIDGETS_EXPORT RundownWidget : public QWidget, Ui::RundownWidget
         QAction* allowRemoteTriggeringAction;
         QAction* insertRepositoryChangesAction;
         QAction* reloadRundownAction;
-        QAction* switchRundownAction;
+        QAction* switchRundown1Action;
+        QAction* switchRundown2Action;
         QAction* openRecentMenuAction;
 
         void setupMenus();
@@ -71,7 +74,8 @@ class WIDGETS_EXPORT RundownWidget : public QWidget, Ui::RundownWidget
         Q_SLOT void openRundownFromDisk();
         Q_SLOT void openRundownFromRepo();
         Q_SLOT void reloadCurrentRundown();
-        Q_SLOT void switchCurrentRundown();
+        Q_SLOT void switchCurrentRundown1();
+        Q_SLOT void switchCurrentRundown2();
         Q_SLOT void closeCurrentRundown();
         Q_SLOT void markItemAsUsedInRundown();
         Q_SLOT void markItemAsUnusedInRundown();
@@ -107,7 +111,8 @@ class WIDGETS_EXPORT RundownWidget : public QWidget, Ui::RundownWidget
         Q_SLOT void saveRundown(const SaveRundownEvent&);
         Q_SLOT void activeRundownChanged(const ActiveRundownChangedEvent&);
         Q_SLOT void reloadRundown(const ReloadRundownEvent&);
-        Q_SLOT void switchRundown(const SwitchRundownEvent&);
+        Q_SLOT void switchRundown1(const SwitchRundown1Event&);
+        Q_SLOT void switchRundown2(const SwitchRundown2Event&);
         Q_SLOT void reloadRundownMenu(const ReloadRundownMenuEvent&);
         Q_SLOT void switchRundownMenu(const SwitchRundownMenuEvent&);
 };
