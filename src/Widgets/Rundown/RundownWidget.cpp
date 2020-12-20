@@ -400,7 +400,7 @@ void RundownWidget::switchRundown1(const SwitchRundown1Event& event)
 
     int maxIndex = this->tabWidgetRundown->count();
     if (maxIndex >= 1) {   
-        this->tabWidgetRundown->setCurrentIndex(1);
+        this->tabWidgetRundown->setCurrentIndex(0);
     }
 
     EventManager::getInstance().fireStatusbarEvent(StatusbarEvent(""));
@@ -414,7 +414,7 @@ void RundownWidget::switchRundown2(const SwitchRundown2Event& event)
 
     int maxIndex = this->tabWidgetRundown->count();
     if (maxIndex >= 2) {   
-        this->tabWidgetRundown->setCurrentIndex(2);
+        this->tabWidgetRundown->setCurrentIndex(1);
     }
 
     EventManager::getInstance().fireStatusbarEvent(StatusbarEvent(""));
