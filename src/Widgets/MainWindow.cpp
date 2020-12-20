@@ -72,7 +72,8 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
     QObject::connect(&EventManager::getInstance(), SIGNAL(exportPresetMenu(const ExportPresetMenuEvent&)), this, SLOT(exportPresetMenu(const ExportPresetMenuEvent&)));
     QObject::connect(&EventManager::getInstance(), SIGNAL(saveAsPresetMenu(const SaveAsPresetMenuEvent&)), this, SLOT(saveAsPresetMenu(const SaveAsPresetMenuEvent&)));
     QObject::connect(&EventManager::getInstance(), SIGNAL(reloadRundownMenu(const ReloadRundownMenuEvent&)), this, SLOT(reloadRundownMenu(const ReloadRundownMenuEvent&)));
-    QObject::connect(&EventManager::getInstance(), SIGNAL(switchRundownMenu(const SwitchRundownMenuEvent&)), this, SLOT(switchRundownMenu(const SwitchRundownMenuEvent&)));
+    QObject::connect(&EventManager::getInstance(), SIGNAL(switchRundown1Menu(const SwitchRundown1MenuEvent&)), this, SLOT(switchRundown1Menu(const SwitchRundown1MenuEvent&)));
+    QObject::connect(&EventManager::getInstance(), SIGNAL(switchRundown2Menu(const SwitchRundown2MenuEvent&)), this, SLOT(switchRundown2Menu(const SwitchRundown2MenuEvent&)));
 }
 
 void MainWindow::setupMenu()
@@ -128,7 +129,8 @@ void MainWindow::setupMenu()
     this->insertRepositoryChangesAction = this->rundownMenu->addAction("Insert Repository Changes", this, SLOT(insertRepositoryChanges()), QKeySequence::fromString("Ins"));
     this->rundownMenu->addSeparator();
     this->reloadRundownAction = this->rundownMenu->addAction("Reload Rundown", this, SLOT(reloadRundown()), QKeySequence::fromString("Ctrl+L"));
-    this->switchRundownAction = this->rundownMenu->addAction("Switch Rundown", this, SLOT(switchRundown()), QKeySequence::fromString("Ctrl+M"));
+    this->switchRundown1Action = this->rundownMenu->addAction("Switch to Rundown 1", this, SLOT(switchRundown1()), QKeySequence::fromString("Ctrl+Shift+1"));
+    this->switchRundown2Action = this->rundownMenu->addAction("Switch to Rundown 2", this, SLOT(switchRundown2()), QKeySequence::fromString("Ctrl+Shift+2"));
     this->rundownMenu->addSeparator();
     this->rundownMenu->addAction("Close Rundown", this, SLOT(closeRundown()), QKeySequence::fromString("Ctrl+W"));
     this->allowRemoteTriggeringAction->setCheckable(true);
@@ -204,9 +206,14 @@ void MainWindow::reloadRundownMenu(const ReloadRundownMenuEvent& event)
     this->reloadRundownAction->setEnabled(event.getEnabled());
 }
 
-void MainWindow::switchRundownMenu(const SwitchRundownMenuEvent& event)
+void MainWindow::switchRundown1Menu(const SwitchRundown1MenuEvent& event)
 {
-    this->switchRundownAction->setEnabled(event.getEnabled());
+    this->switchRundown1Action->setEnabled(event.getEnabled());
+}
+
+void MainWindow::switchRundown2Menu(const SwitchRundown2MenuEvent& event)
+{
+    this->switchRundown2Action->setEnabled(event.getEnabled());
 }
 
 void MainWindow::emptyRundown(const EmptyRundownEvent& event)
@@ -441,9 +448,14 @@ void MainWindow::reloadRundown()
     EventManager::getInstance().fireReloadRundownEvent(ReloadRundownEvent());
 }
 
-void MainWindow::switchRundown()
+void MainWindow::switchRundown1()
 {
-    EventManager::getInstance().fireSwitchRundownEvent(SwitchRundownEvent());
+    EventManager::getInstance().fireSwitchRundown1Event(SwitchRundown1Event());
+}
+
+void MainWindow::switchRundown2()
+{
+    EventManager::getInstance().fireSwitchRundown2Event(SwitchRundown2Event());
 }
 
 void MainWindow::showAboutDialog()

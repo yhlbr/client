@@ -143,7 +143,8 @@ HEADERS += \
     Events/Rundown/OpenRundownFromUrlEvent.h \
     Events/Rundown/OpenRundownFromUrlMenuEvent.h \
     Events/Rundown/ReloadRundownEvent.h \
-    Events/Rundown/SwitchRundownEvent.h \
+    Events/Rundown/SwitchRundown1Event.h \
+    Events/Rundown/SwitchRundown2Event.h \
     Models/Atem/AtemKeyerModel.h \
     Events/Inspector/ShowAddTemplateDataDialogEvent.h \
     Events/Rundown/MarkItemAsUsedEvent.h \
@@ -166,7 +167,8 @@ HEADERS += \
     Models/RepositoryChangeModel.h \
     Events/Rundown/InsertRepositoryChangesEvent.h \
     Events/Rundown/ReloadRundownMenuEvent.h \
-    Events/Rundown/SwitchRundownMenuEvent.h \
+    Events/Rundown/SwitchRundown1MenuEvent.h \
+    Events/Rundown/SwitchRundown2MenuEvent.h \
     Events/DurationChangedEvent.h \
     Commands/Panasonic/PanasonicPresetCommand.h \
     Commands/PerspectiveCommand.h \
@@ -330,7 +332,8 @@ SOURCES += \
     Events/Rundown/OpenRundownFromUrlEvent.cpp \
     Events/Rundown/OpenRundownFromUrlMenuEvent.cpp \
     Events/Rundown/ReloadRundownEvent.cpp \
-    Events/Rundown/SwitchRundownEvent.cpp \
+    Events/Rundown/SwitchRundown1Event.cpp \
+    Events/Rundown/SwitchRundown2Event.cpp \
     Models/Atem/AtemKeyerModel.cpp \
     Events/Inspector/ShowAddTemplateDataDialogEvent.cpp \
     Events/Rundown/MarkItemAsUsedEvent.cpp \
@@ -353,7 +356,8 @@ SOURCES += \
     Models/RepositoryChangeModel.cpp \
     Events/Rundown/InsertRepositoryChangesEvent.cpp \
     Events/Rundown/ReloadRundownMenuEvent.cpp \
-    Events/Rundown/SwitchRundownMenuEvent.cpp \
+    Events/Rundown/SwitchRundown1MenuEvent.cpp \
+    Events/Rundown/SwitchRundown2MenuEvent.cpp \
     Events/DurationChangedEvent.cpp \
     Commands/Panasonic/PanasonicPresetCommand.cpp \
     Commands/PerspectiveCommand.cpp \
